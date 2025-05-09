@@ -89,8 +89,9 @@ export default defineType({
     }),
     // Remove the old CTA block reference and add a correctly defined one
     defineArrayMember({
-      type: 'reference',
+      name: 'ctaRef',
       title: 'Call to Action',
+      type: 'reference',
       to: [{type: 'ctaBlock'}],
     }),
     // Add a code block using object type
