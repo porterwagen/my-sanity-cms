@@ -30,7 +30,10 @@ export default defineType({
         {title: 'H4', value: 'h4'},
         {title: 'Quote', value: 'blockquote'},
       ],
-      lists: [{title: 'Bullet', value: 'bullet'}],
+      lists: [
+        {title: 'Bullet', value: 'bullet'},
+        {title: 'Numbered', value: 'number'}
+      ],
       // Marks let you mark up inline text in the block editor.
       marks: {
         // Decorators usually describe a single property – e.g. a typographic
@@ -38,6 +41,8 @@ export default defineType({
         decorators: [
           {title: 'Strong', value: 'strong'},
           {title: 'Emphasis', value: 'em'},
+          {title: 'Underline', value: 'underline'},
+          {title: 'Strike', value: 'strike-through'},
         ],
         // Annotations can be any object structure – e.g. a link or a footnote.
         annotations: [
@@ -51,6 +56,12 @@ export default defineType({
                 name: 'href',
                 type: 'url',
               },
+              {
+                title: 'Open in new tab',
+                name: 'blank',
+                type: 'boolean',
+                initialValue: true,
+              },
             ],
           },
         ],
@@ -62,6 +73,59 @@ export default defineType({
     defineArrayMember({
       type: 'image',
       options: {hotspot: true},
+      fields: [
+        {
+          name: 'alt',
+          type: 'string',
+          title: 'Alternative text',
+          description: 'Important for SEO and accessibility',
+        },
+        {
+          name: 'caption',
+          type: 'string',
+          title: 'Caption',
+        },
+      ],
+    }),
+    // Remove the old CTA block reference and add a correctly defined one
+    defineArrayMember({
+      type: 'reference',
+      title: 'Call to Action',
+      to: [{type: 'ctaBlock'}],
+    }),
+    // Add a code block using object type
+    defineArrayMember({
+      name: 'code',
+      title: 'Code Block',
+      type: 'object',
+      fields: [
+        {
+          name: 'language',
+          title: 'Language',
+          type: 'string',
+          options: {
+            list: [
+              { title: 'JavaScript', value: 'javascript' },
+              { title: 'HTML', value: 'html' },
+              { title: 'CSS', value: 'css' },
+              { title: 'PHP', value: 'php' },
+              { title: 'Plain text', value: 'text' }
+            ]
+          },
+          initialValue: 'javascript'
+        },
+        {
+          name: 'filename',
+          title: 'Filename (optional)',
+          type: 'string'
+        },
+        {
+          name: 'code',
+          title: 'Code',
+          type: 'text',
+          rows: 10
+        }
+      ]
     }),
   ],
 })
