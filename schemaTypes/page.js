@@ -49,35 +49,83 @@ export default defineType({
       group: 'meta',
     }),
     defineField({
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent', // This contains the CTA blocks
+      name: 'pageBuilder',
+      title: 'Page Content',
+      description: 'Add, edit, and reorder content sections of the page',
       group: 'content',
+      type: 'array',
+      of: [
+        // Hero section (usually for page top)
+        {
+          type: 'heroSection'
+        },
+        // Text content section (WYSIWYG editor)
+        {
+          type: 'object',
+          name: 'textContent',
+          title: 'Text Content',
+          fields: [
+            {
+              name: 'content',
+              title: 'Content',
+              type: 'blockContent',
+            }
+          ],
+          preview: {
+            select: {
+              blocks: 'content',
+            },
+            prepare(value) {
+              const block = (value.blocks || []).find(block => block._type === 'block')
+              return {
+                title: block
+                  ? block.children
+                      .filter(child => child._type === 'span')
+                      .map(span => span.text)
+                      .join('')
+                  : 'No content',
+                subtitle: 'Text Content'
+              }
+            }
+          }
+        },
+        // Service section
+        {
+          type: 'serviceSection'
+        },
+        // Image gallery component
+        {
+          type: 'imageGallery'
+        },
+        // FAQ section
+        {
+          type: 'faqSection'
+        },
+        // Testimonial section
+        {
+          type: 'testimonialSection'
+        },
+        // Pricing table
+        {
+          type: 'pricingTable'
+        },
+        // Inline CTA section (reference to CTA documents)
+        {
+          type: 'reference',
+          name: 'inlineCta',
+          title: 'CTA Block',
+          to: [{type: 'ctaBlock'}],
+        },
+      ],
     }),
-    // Page sections functionality commented out
-    // defineField({
-    //   name: 'pageBuilder',
-    //   title: 'Page Sections',
-    //   description: 'Add, edit, and reorder sections of the page',
-    //   group: 'content',
-    //   type: 'array',
-    //   of: [
-    //     {
-    //       type: 'serviceSection',
-    //     },
-    //     {
-    //       type: 'ctaBlock',
-    //     },
-    //   ],
-    // }),
-    // defineField({
-    //   name: 'isServicePage',
-    //   title: 'Is Service Page',
-    //   type: 'boolean',
-    //   group: 'content',
-    //   description: 'Enable service page features and layout',
-    //   initialValue: false,
-    // }),
+    defineField({
+      name: 'isServicePage',
+      title: 'Is Service Page',
+      type: 'boolean',
+      group: 'content',
+      description: 'Enable service page features and layout',
+      initialValue: false,
+    }),
     defineField({
       name: 'seo',
       title: 'SEO',

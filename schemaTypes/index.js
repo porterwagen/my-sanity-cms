@@ -5,6 +5,11 @@ import page from './page'
 import ctaBlock from './ctaBlock'
 import ctaRef from './ctaRef'
 import serviceSection from './serviceSection'
+import imageGallery from './imageGallery'
+import faqSection from './faqSection'
+import testimonialSection from './testimonialSection'
+import pricingTable from './pricingTable'
+import heroSection from './heroSection'
 import blockContent from './blockContent'
 
 export const schemaTypes = [
@@ -18,5 +23,10 @@ export const schemaTypes = [
   // Object types
   ctaRef,
   serviceSection,
+  imageGallery,
+  faqSection,
+  testimonialSection,
+  pricingTable,
+  heroSection,
   blockContent
 ]
