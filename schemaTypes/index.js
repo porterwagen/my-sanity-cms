@@ -11,6 +11,7 @@ import testimonialSection from './testimonialSection'
 import pricingTable from './pricingTable'
 import heroSection from './heroSection'
 import blockContent from './blockContent'
+import todo from './todo'
 
 export const schemaTypes = [
   // Document types
@@ -19,6 +20,7 @@ export const schemaTypes = [
   category,
   page,
   ctaBlock,
+  todo,
 
   // Object types
   ctaRef,
