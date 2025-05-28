@@ -10,6 +10,10 @@ export default defineType({
       title: 'Content',
     },
     {
+      name: 'hierarchy',
+      title: 'Page Hierarchy',
+    },
+    {
       name: 'meta',
       title: 'SEO & Metadata',
     },
@@ -49,16 +53,36 @@ export default defineType({
       group: 'meta',
     }),
     defineField({
+      name: 'parent',
+      title: 'Parent Page',
+      type: 'reference',
+      to: [{type: 'page'}],
+      group: 'hierarchy',
+      description: 'Select a parent page to create a hierarchy. Leave empty for top-level pages.',
+      validation: Rule => Rule.custom((parent, context) => {
+        // Prevent self-reference
+        if (parent && parent._ref === context.document._id) {
+          return 'A page cannot be its own parent'
+        }
+        return true
+      })
+    }),
+    defineField({
+      name: 'menuOrder',
+      title: 'Menu Order',
+      type: 'number',
+      group: 'hierarchy',
+      description: 'Order in navigation menus (lower numbers appear first)',
+      initialValue: 0,
+      validation: Rule => Rule.min(0)
+    }),
+    defineField({
       name: 'pageBuilder',
       title: 'Page Content',
       description: 'Add, edit, and reorder content sections of the page',
       group: 'content',
       type: 'array',
       of: [
-        // Hero section (usually for page top)
-        {
-          type: 'heroSection'
-        },
         // Text content section (WYSIWYG editor)
         {
           type: 'object',
@@ -89,10 +113,6 @@ export default defineType({
             }
           }
         },
-        // Service section
-        {
-          type: 'serviceSection'
-        },
         // Image gallery component
         {
           type: 'imageGallery'
@@ -105,10 +125,6 @@ export default defineType({
         {
           type: 'testimonialSection'
         },
-        // Pricing table
-        {
-          type: 'pricingTable'
-        },
         // Inline CTA section (reference to CTA documents)
         {
           type: 'reference',
@@ -117,14 +133,6 @@ export default defineType({
           to: [{type: 'ctaBlock'}],
         },
       ],
-    }),
-    defineField({
-      name: 'isServicePage',
-      title: 'Is Service Page',
-      type: 'boolean',
-      group: 'content',
-      description: 'Enable service page features and layout',
-      initialValue: false,
     }),
     defineField({
       name: 'seo',
