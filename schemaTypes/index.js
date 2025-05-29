@@ -1,6 +1,7 @@
 import category from './category'
 import post from './post'
 import page from './page'
+import project from './project'
 import ctaBlock from './ctaBlock'
 import ctaRef from './ctaRef'
 import imageGallery from './imageGallery'
@@ -14,6 +15,7 @@ export const schemaTypes = [
   post,
   category,
   page,
+  project,
   ctaBlock,
   todo,
 
