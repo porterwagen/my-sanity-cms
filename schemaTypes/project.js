@@ -54,10 +54,10 @@ export default defineType({
     }),
     defineField({
       name: 'projectLead',
-      title: 'Project Lead',
+      title: 'Project Lead In',
       type: 'string',
       group: 'content',
-      description: 'The lead person or team responsible for this project',
+      description: 'The lead-in phrase for the project.',
     }),
     defineField({
       name: 'publishedAt',
