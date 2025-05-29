@@ -53,6 +53,13 @@ export default defineType({
       description: 'Optional mobile-optimized version of the main image. If not provided, the main image will be used on all devices.',
     }),
     defineField({
+      name: 'projectLead',
+      title: 'Project Lead',
+      type: 'string',
+      group: 'content',
+      description: 'The lead person or team responsible for this project',
+    }),
+    defineField({
       name: 'publishedAt',
       title: 'Published at',
       type: 'datetime',
