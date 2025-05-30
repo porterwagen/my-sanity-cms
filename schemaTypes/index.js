@@ -11,18 +11,20 @@ import blockContent from './blockContent'
 import todo from './todo'
 
 export const schemaTypes = [
-  // Document types
-  post,
+  // Base schema types first
+  blockContent,
   category,
-  page,
-  project,
-  ctaBlock,
-  todo,
-
-  // Object types
+  
+  // Object types next
   ctaRef,
   imageGallery,
   faqSection,
   testimonialSection,
-  blockContent
+  
+  // Document types last
+  ctaBlock,
+  todo,
+  post,
+  page,
+  project
 ]

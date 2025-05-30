@@ -84,7 +84,7 @@ export default defineType({
         // Text content section (WYSIWYG editor)
         {
           type: 'object',
-          name: 'textContent',
+          name: 'projectContent',
           title: 'Text Content',
           fields: [
             {

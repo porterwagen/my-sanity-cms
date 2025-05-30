@@ -11,7 +11,11 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
-
+  
+  mediaLibrary: {
+    enabled: true,
+  },
+  
   schema: {
     types: schemaTypes,
   },
